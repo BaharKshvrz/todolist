@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.pageContainer {
+    @apply max-w-7xl bg-gray-50 flex flex-grow;
+  }  

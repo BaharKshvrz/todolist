@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './assets/styles/global.css';
+import Header from './components/layout/Header';
+import ContentContainer from './components/layout/Container';
+import Footer from './components/layout/Footer';
+import Sidebar from './components/layout/Sidebar';
+import MainContent from './components/layout/MainContent';
+import { useState } from 'react';
 
 function App() {
+  const [showTasks, setShowTasks] = useState(false); 
+  const [todoId, setTodoId] = useState("");
+
+  const handleShowTasks = (id: string) => {
+      setShowTasks(true);
+      setTodoId(id);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+       <Header/>
+       <ContentContainer>
+          <Sidebar handleShowTasks={handleShowTasks}/>
+          <MainContent showTasks={showTasks} todoId={todoId}/>
+       </ContentContainer>
+       <Footer/>
+    </>
   );
 }
 
