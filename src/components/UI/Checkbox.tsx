@@ -24,8 +24,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     const isChecked = event.target.checked;
     onChange(value, isChecked);
   };
-
-  const taskLable = htmlTag === "true" ? <s> {label}</s> : label;
+ const taskLable = htmlTag === "true" ? <s> {label}</s> : label;
 
   return ( 
     <>

@@ -3,7 +3,7 @@ import Header from './components/layout/Header';
 import ContentContainer from './components/layout/Container';
 import Footer from './components/layout/Footer';
 import Sidebar from './components/layout/Sidebar';
-import MainContent from './components/layout/MainContent';
+import ListContent from './components/layout/ListContent';
 import { useState } from 'react';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
        <Header/>
        <ContentContainer>
           <Sidebar handleShowTasks={handleShowTasks}/>
-          <MainContent showTasks={showTasks} todoId={todoId}/>
+          <ListContent todoId={todoId}/>
        </ContentContainer>
        <Footer/>
     </>

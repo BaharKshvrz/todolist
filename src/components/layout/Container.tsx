@@ -6,9 +6,8 @@ interface ContentContainerProps {
 }
 
 const ContentContainer: FC<ContentContainerProps> = (props) => {
- 
-  return (
-   <div className={`pageContainer mx-auto h-screen p-4 ${props.classes}`}>
+ return (
+   <div className={`pageContainer mx-auto flex flex-col sm:flex-row h-screen p-4 ${props.classes}`}>
        {props.children}
     </div>
   )

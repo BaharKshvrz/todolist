@@ -8,11 +8,14 @@ export type RootState = ReturnType<typeof store.getState>;
 export const selectLists = (state: RootState): Lists => state.todos.lists;
 
 // Select a specific list by its ID
-export const selectListById = (listId: string) => 
-          createSelector(selectLists, (lists: Lists) => lists[listId]);
+export const selectListById = (listId: string) =>  {
+  console.log("listId", listId);
+return   createSelector(selectLists, (lists: Lists) => lists[listId]?? "");
+
+}
 
 // Select the tasks for a specific list
 export const selectTasksForList = (listId: string) =>
-  createSelector(selectListById(listId), (list: List | undefined) =>
-    list ? list.tasks : []
+                        createSelector(selectListById(listId), (list: List | undefined) =>
+                        list ? list.tasks : []
   );

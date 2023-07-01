@@ -8,6 +8,9 @@ import { Task } from '../../store/todo/todo.types';
 import uuid from 'react-uuid';
 import { useDispatch } from 'react-redux';
 import { addTaskToList } from '../../store/todo/todo.slice';
+import { useSelector } from 'react-redux';
+import { RootState, selectListById } from '../../store/todo/todo.selectors';
+import TextualComponent from '../UI/TextualComponent';
 
 type AddTaskProps = {
   listId: string,
@@ -15,8 +18,9 @@ type AddTaskProps = {
 
 const AddTask: React.FC<AddTaskProps> = ({listId}) => {
   const dispatch = useDispatch();
-  const [taskTitle, setTaskTitle] = useState("");  
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [ taskTitle, setTaskTitle ] = useState("");  
+  const [ selectedDate, setSelectedDate ] = useState<Date | null>(null);
+  const listData =  useSelector((state: RootState) => selectListById(listId)(state));
 
   const handleDateChange = (date: Date) => {
      setSelectedDate(date);
@@ -38,14 +42,18 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
     }
   }
   return (
-    <div className="p-2 m-5">
-       <div className="flex flex-col w-full h-28 p-2 text-white bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+     <div className="flex flex-col w-full h-40 p-2 text-white bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
          <form onSubmit={handleAddTask}>
-              <Input 
+               { listId ? (<h1 className="text-base text-center py-2 text-gray-600 italic font-semibold">
+                             Add Task to <span className="font-bold text-gray-900 text-lg">{listData.name}</span>
+                           </h1>) 
+                        : ""
+               } 
+                <Input 
                   type="text"
                   value={taskTitle}
-                  placeholder="Add Task"
-                  className="w-full h-10 p-3 text-gray-900 bg-white border border-gray-300 rounded-lg sm:text-md focus:ring-gray-500 focus:border-gray-500"
+                  placeholder="New Task"
+                  className="w-full mt-1italic h-10 p-3 text-gray-900 bg-white border border-gray-300 rounded-lg sm:text-md focus:ring-gray-500 focus:border-gray-500"
                   onChange={e => setTaskTitle(e.target.value)}
                />
             <div className="flex justify-between items-center bg-gray-100 p-2">
@@ -63,6 +71,7 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
               <div>
                 <Button
                   type="submit"
+                  disabled={taskTitle && listId ? false : true}
                   className="bg-white w-16 flex items-center justify-center p-2 ml-1 rounded-lg text-black text-sm border"
                  >
                   Add
@@ -70,7 +79,6 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
              </div>
             </div>
          </form>
-       </div>
     </div>
   )
 }

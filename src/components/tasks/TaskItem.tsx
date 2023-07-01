@@ -5,6 +5,8 @@ import Time from '../../libs/timeHelper';
 import Checkbox from '../UI/Checkbox';
 import { toggleTaskCompletion } from '../../store/todo/todo.slice';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState, selectListById } from '../../store/todo/todo.selectors';
 
 type TodoItemProps = {
     task: Task,
@@ -12,17 +14,16 @@ type TodoItemProps = {
   };
 
 const TaskItem: React.FC<TodoItemProps> = ({listId, task}) => {
-  const [completionChecked, setCompletionChecked] = useState(false);
+  const [completionChecked, setCompletionChecked] = useState(task.completion || false);
   const dispatch = useDispatch();
-
   const handleCheckboxChange = (value: string, checked: boolean) => {
        dispatch(toggleTaskCompletion({ listId,  taskId: task.id }));
        setCompletionChecked(!checked);
   };
 
  return (
-    <div className="flex flex-col w-full min-h-14 py-1 px-5 mb-3 text-gray-500 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-      <div className="flex items-center mb-4">
+    <div className="flex flex-col min-h-14 m-2 text-gray-500 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+      <div className="flex items-center mb-1 p-3">
         <Checkbox
              value={task.completion.toString()}
              label={task.title}
@@ -33,8 +34,11 @@ const TaskItem: React.FC<TodoItemProps> = ({listId, task}) => {
              labelCalsses='w-full ml-2 text-base font-semibold text-gray-500 text-lg'
              />
        </div>
+
        { task.date ? 
-                   <time className="flex items-center text-base font-thin text-gray-900"><IconCalendar/>  Due <Time date={new Date(task.date)}/> </time> 
+                   <time className="flex items-center text-base p-3 font-thin text-gray-900">
+                       <IconCalendar/> Due <Time date={new Date(task.date)}/> 
+                   </time> 
                    : ""
          }
     </div>

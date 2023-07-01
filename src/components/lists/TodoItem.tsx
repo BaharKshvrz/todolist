@@ -9,6 +9,8 @@ import Input from "../UI/Input";
 import IconListSettingsLine from "../../assets/icons/ListSetting";
 import IconDeleteBin5Line from "../../assets/icons/Remove";
 import IconArrowsHamburger from "../../assets/icons/IconArrowsHamburger";
+import IconListAdd from "../../assets/icons/ListAdd";
+import IconEdit from "../../assets/icons/Edit";
 
 
 type TodoItemProps = {
@@ -47,8 +49,7 @@ const TodoItem: React.FC<TodoItemProps> = ({list, handleShowTasks}) => {
   return (
     <>
       <div className="flex flex-col border-b p-3 hover:bg-gray-100">
-        <div className="flex items-center py-3">
-         <IconArrowsHamburger className="mr-3 hover:cursor-pointer" onClick={showTasks}/>
+        <div className="flex items-center py-3 font-medium">
           {  editable ? 
                        <Input 
                         type="text"
@@ -60,21 +61,30 @@ const TodoItem: React.FC<TodoItemProps> = ({list, handleShowTasks}) => {
           }
         </div>
         <div className="flex items-center">
-         <Button
-           type="button"
-           className="bg-red-500 flex items-center justify-center p-2 rounded-lg text-white text-sm"
-           onClick={OnDelteHandler}
-         >
-         <IconDeleteBin5Line/> Delete
-        </Button>
-      
         <Button
            type="button"
-           className="bg-orange-500 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm"
+           className="bg-gray-500 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm hover:cursor-pointer"
+           onClick={showTasks}
+        >
+          <IconListAdd/>
+        </Button>
+     
+        <Button
+           type="button"
+           className="bg-gray-400 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm"
            onClick={onEditList}
         >
-          <IconListSettingsLine/>  Edit
+          <IconEdit/>
         </Button>
+
+        <Button
+           type="button"
+           className="bg-red-500 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm"
+           onClick={OnDelteHandler}
+         >
+         <IconDeleteBin5Line/>
+        </Button>
+
         </div>
       </div>
       { showModal && <PopupModal onCancel={handleCloseModal} onDelete={handleConfirmDelete}/>}
