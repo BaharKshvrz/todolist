@@ -1,8 +1,8 @@
 export interface Task {
     id: string;
-    completion: boolean;
     title: string;
-    date: Date;
+    completion: boolean;
+    date?: Date;
 }
 
 export interface List {

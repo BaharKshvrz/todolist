@@ -1,22 +1,47 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Input from '../UI/Input'
 import Button from '../UI/Button';
 import IconCalendar from '../../assets/icons/Calendar';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Task } from '../../store/todo/todo.types';
+import uuid from 'react-uuid';
+import { useDispatch } from 'react-redux';
+import { addTaskToList } from '../../store/todo/todo.slice';
 
-const AddTask = () => {
+type AddTaskProps = {
+  listId: string,
+};
+
+const AddTask: React.FC<AddTaskProps> = ({listId}) => {
+  const dispatch = useDispatch();
   const [taskTitle, setTaskTitle] = useState("");  
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const handleDateChange = (date: Date | null) => {
+  const handleDateChange = (date: Date) => {
      setSelectedDate(date);
   };
 
+  const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (taskTitle) {
+       let newTask: Task = {
+          title: taskTitle,
+          id: uuid(),  
+          completion: false,
+          date: selectedDate!
+       };
+      dispatch(addTaskToList({listId: listId!,task: newTask}));
+      setTaskTitle("");
+      setSelectedDate(null);
+    }
+  }
   return (
-    <>
-      <div className="flex flex-col w-full h-28 p-2 m-5 text-white bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-            <Input 
+    <div className="p-2 m-5">
+       <div className="flex flex-col w-full h-28 p-2 text-white bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+         <form onSubmit={handleAddTask}>
+              <Input 
                   type="text"
                   value={taskTitle}
                   placeholder="Add Task"
@@ -29,23 +54,24 @@ const AddTask = () => {
                    selected={selectedDate}
                    onChange={handleDateChange}
                    dateFormat="dd/MM/yyyy"
-                   customInput={ <IconCalendar className="bg-gray-600"/>}
+                   customInput={<IconCalendar className="bg-gray-600"/>}
                  />
                  <p className="text-black ml-2">
                    { selectedDate?.toLocaleDateString('en-GB') }
                  </p>
               </div>
-
               <div>
                 <Button
-                  type="button"
+                  type="submit"
                   className="bg-white w-16 flex items-center justify-center p-2 ml-1 rounded-lg text-black text-sm border"
-                 >Add
+                 >
+                  Add
                </Button>
              </div>
             </div>
-      </div>
-    </>
+         </form>
+       </div>
+    </div>
   )
 }
 

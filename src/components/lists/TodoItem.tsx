@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { List } from "../../store/todo/todo.types";
 import { removeTodoList, updateTodoList } from "../../store/todo/todo.slice";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PopupModal from "../modal/PopupModal";
 import Button from "../UI/Button";
 import useDebounce from "../hooks/useDebounce";
@@ -21,7 +21,6 @@ const TodoItem: React.FC<TodoItemProps> = ({list, handleShowTasks}) => {
   const [editable, setEditable] = useState(false);
   const [todoTitle, setTodoTitle] = useState(list.name);  
   const dispatch = useDispatch();
-
   useDebounce(() => {setEditable(!editable); dispatch(updateTodoList({...list, name: todoTitle})) }, 2000, [ todoTitle ]);
 
   const onEditList = () => {

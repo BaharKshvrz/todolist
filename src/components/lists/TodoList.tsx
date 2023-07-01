@@ -1,15 +1,15 @@
 
 import { useSelector } from "react-redux";
 import TodoItem from "./TodoItem"
-import { selectTodos } from "../../store/todo/todo.selectors";
-
+import { selectLists } from "../../store/todo/todo.selectors";
 
 type TodoListProps = {
   handleShowTasks: (id: string) => void;
 };
 
 const TodoList : React.FC<TodoListProps> = ({handleShowTasks}) => {
-  const todos = useSelector(selectTodos);
+  let todos = useSelector(selectLists);
+  let todosList = todos ? Object.values(todos) : null
 
   return (
     <>
@@ -26,7 +26,7 @@ const TodoList : React.FC<TodoListProps> = ({handleShowTasks}) => {
              className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for name"/>
            </div>
         </div>
-        { todos && todos.map((todo, index) => 
+        { todosList && todosList.map((todo, index) => 
               <TodoItem
                  key= {index}
                  list= {todo}

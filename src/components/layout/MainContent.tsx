@@ -1,5 +1,6 @@
 import React from 'react'
 import TaskForm from '../tasks/AddTask';
+import TasksList from '../tasks/TasksList';
 
 type MainContentProps = {
    showTasks: boolean,
@@ -8,11 +9,10 @@ type MainContentProps = {
 
 const MainContent: React.FC<MainContentProps> = ({showTasks, todoId}) => {
   return (
-    <div className="flex justify-center bg-white w-full mx-5 border-sm shadow-sm">
-          {todoId}
-          <TaskForm/>
-
-    </div>
+    <div className="flex flex-col bg-white w-full mx-5 border-sm shadow-sm">
+          <TaskForm listId={todoId}/>
+          <TasksList listId={todoId}/>
+   </div>
   )
 }
 

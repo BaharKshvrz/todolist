@@ -29,7 +29,6 @@ const AddNewTodo = () => {
          <div className="flex justify-center items-center w-full">
          <Input 
               type="text"
-              id="list-input"
               value={listName} 
               placeholder="Add New List"
               onChange={e => setlistName(e.target.value)}
