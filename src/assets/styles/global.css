@@ -6,8 +6,9 @@ body {
    @apply font-sans;
 }
 
+/* max-w-7xl */
 .pageContainer {
-    @apply max-w-7xl bg-white flex flex-grow;
+    @apply flex flex-grow bg-black;
   }  
 
  @layer utilities {

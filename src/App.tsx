@@ -18,10 +18,10 @@ function App() {
   return (
     <>
        <Header/>
-       <ContentContainer>
+        <ContentContainer>
           <Sidebar handleShowTasks={handleShowTasks}/>
           <ListContent todoId={todoId}/>
-       </ContentContainer>
+        </ContentContainer>
        <Footer/>
     </>
   );

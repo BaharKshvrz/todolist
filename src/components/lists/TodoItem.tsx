@@ -48,43 +48,40 @@ const TodoItem: React.FC<TodoItemProps> = ({list, handleShowTasks}) => {
   
   return (
     <>
-      <div className="flex flex-col border-b p-3 hover:bg-gray-100">
-        <div className="flex items-center py-3 font-medium">
+      <div className="flex justify-between border-b p-2 hover:bg-gray-50">
+        <div className="flex items-center py-2 font-base">
           {  editable ? 
                        <Input 
                         type="text"
                         value={todoTitle}
-                        className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
+                        className="block w-full p-2 text-gray-900 border border-gray-200 rounded-lg bg-white text-md"
                         onChange={e => setTodoTitle(e.target.value)}
                         />
                      : list.name
           }
         </div>
-        <div className="flex items-center">
-        <Button
-           type="button"
-           className="bg-gray-500 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm hover:cursor-pointer"
-           onClick={showTasks}
-        >
-          <IconListAdd/>
-        </Button>
-     
-        <Button
-           type="button"
-           className="bg-gray-400 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm"
-           onClick={onEditList}
-        >
-          <IconEdit/>
-        </Button>
-
-        <Button
-           type="button"
-           className="bg-red-500 flex items-center justify-center p-2 ml-1 rounded-lg text-white text-sm"
-           onClick={OnDelteHandler}
-         >
-         <IconDeleteBin5Line/>
-        </Button>
-
+        <div className="flex items-center justify-end">
+            <Button
+              type="button"
+              className="bg-gray-100 flex items-center justify-center p-2 ml-1 rounded-lg text-gray-500 text-sm hover:cursor-pointer"
+              onClick={showTasks}
+            >
+              <IconListAdd/>
+            </Button>
+            <Button
+              type="button"
+              className="bg-gray-100 flex items-center justify-center p-2 ml-1 rounded-lg text-gray-500 text-sm"
+              onClick={onEditList}
+            >
+              <IconEdit/>
+            </Button>
+            <Button
+              type="button"
+              className="bg-gray-100 flex items-center justify-center p-2 ml-1 rounded-lg text-gray-500 text-sm"
+              onClick={OnDelteHandler}
+            >
+            <IconDeleteBin5Line/>
+            </Button>
         </div>
       </div>
       { showModal && <PopupModal onCancel={handleCloseModal} onDelete={handleConfirmDelete}/>}
