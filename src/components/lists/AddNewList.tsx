@@ -3,10 +3,10 @@ import { List } from '../../store/todo/todo.types';
 import { useDispatch } from 'react-redux';
 import { addTodoList } from '../../store/todo/todo.slice';
 import uuid from 'react-uuid';
-import Input from '../UI/Input';
+import Input from '../ul/Input';
 import IconAdd from '../../assets/icons/Add';
 
-const AddNewTodo = () => {
+const AddNewList = () => {
   const [listName, setlistName] = useState("");  
   const dispatch = useDispatch();
 
@@ -46,4 +46,4 @@ const AddNewTodo = () => {
   )
 }
 
-export default AddNewTodo
+export default AddNewList

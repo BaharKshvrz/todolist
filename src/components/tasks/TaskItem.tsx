@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Task } from '../../store/todo/todo.types';
 import IconCalendar from '../../assets/icons/Calendar';
 import Time from '../../libs/timeHelper';
-import Checkbox from '../UI/Checkbox';
+import Checkbox from '../ul/Checkbox';
 import { toggleTaskCompletion } from '../../store/todo/todo.slice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';

@@ -26,6 +26,27 @@ export const todosSlice = createSlice({
       const { listId, task } = action.payload;
       state.lists[listId].tasks.push(task);
     },
+
+    updateTaskInList: (
+      state,
+      action: PayloadAction<{ listId: string; task: Task }>
+    ) => {
+      const { listId, task } = action.payload;
+      const list = state.lists[listId];
+      const taskIndex = list.tasks.findIndex((item) => item.id === task.id);
+      if (taskIndex !== -1) {
+        list.tasks[taskIndex] = { ...list.tasks[taskIndex], ...task };
+      }
+    },
+    removeTaskFromList: (
+      state,
+      action: PayloadAction<{ listId: string; taskId: string }>
+    ) => {
+      const { listId, taskId } = action.payload;
+      let selectedList = state.lists[listId];
+      const filteredTasks= selectedList.tasks.filter(task => task.id !== taskId);
+      state.lists[listId].tasks = filteredTasks;
+    },
     toggleTaskCompletion: (
       state,
       action: PayloadAction<{ listId: string; taskId: string }>
@@ -44,5 +65,7 @@ export const {
                 removeTodoList, 
                 updateTodoList, 
                 addTaskToList,
+                updateTaskInList,
                 toggleTaskCompletion,
+                removeTaskFromList,
               } = todosSlice.actions;

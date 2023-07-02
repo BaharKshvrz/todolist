@@ -8,34 +8,32 @@ import { Task } from '../../store/todo/todo.types';
 import uuid from 'react-uuid';
 import { useDispatch } from 'react-redux';
 import { addTaskToList } from '../../store/todo/todo.slice';
-import IconAdd from '../../assets/icons/Add';
-import SelectBox from '../ul/SelectBox';
-import { priorityList } from '../../data/priorityList';
+import { useSelector } from 'react-redux';
+import { RootState, selectListById } from '../../store/todo/todo.selectors';
+import TextualComponent from '../ul/TextualComponent';
 
 type AddTaskProps = {
-   listId: string,
+  listId: string,
 };
 
 const AddTask: React.FC<AddTaskProps> = ({listId}) => {
   const dispatch = useDispatch();
   const [ taskTitle, setTaskTitle ] = useState("");  
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleSelectChange = (value: string) => {
-      setSelectedOption(value);
-  };
   const [ selectedDate, setSelectedDate ] = useState<Date | null>(null);
-  const handleDateChange = (value: Date) => {
-     setSelectedDate(value);
+  const listData =  useSelector((state: RootState) => selectListById(listId)(state));
+
+  const handleDateChange = (date: Date) => {
+     setSelectedDate(date);
   };
 
   const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (taskTitle) {
        let newTask: Task = {
           title: taskTitle,
           id: uuid(),  
           completion: false,
-          priority: selectedOption,
           date: selectedDate!
        };
       dispatch(addTaskToList({listId: listId!,task: newTask}));
@@ -43,39 +41,34 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
       setSelectedDate(null);
     }
   }
-
   return (
-          <form onSubmit={handleAddTask}>
-              <div className="flex items-center space-x-1 hover:cursor-pointer">
-                 <label htmlFor="table-search" className="sr-only">Insert</label>
-                 <div className="relative mt-1">
-                       <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <IconAdd width="1em" height="1em" className="text-gray-400"/>
-                      </div>
-                      <Input 
-                        type="text"
-                        value={taskTitle}
-                        placeholder="Add New Task"
-                        onChange={e => setTaskTitle(e.target.value)}
-                        className="block p-2 pl-10 text-sm w-full text-gray-900 border border-gray-300 rounded-lg"
-                      />
-                 </div>
-                 <SelectBox 
-                      options={priorityList} 
-                      value={selectedOption}
-                      onChange={handleSelectChange}
-                      classes="w-20"
-                 />    
-                <DatePicker
+     <div className="flex flex-col w-full h-40 p-2 text-white bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+         <form onSubmit={handleAddTask}>
+               { listId ? (<h1 className="text-base text-center py-2 text-gray-600 italic font-semibold">
+                             Add Task to <span className="font-bold text-gray-900 text-lg">{listData.name}</span>
+                           </h1>) 
+                        : ""
+             } 
+                <Input 
+                  type="text"
+                  value={taskTitle}
+                  placeholder="New Task"
+                  className="w-full mt-1italic h-10 p-3 text-gray-900 bg-white border border-gray-300 rounded-lg sm:text-md focus:ring-gray-500 focus:border-gray-500"
+                  onChange={e => setTaskTitle(e.target.value)}
+               />
+            <div className="flex justify-between items-center bg-gray-100 p-2">
+              <div className="flex justify-center items-center">
+                 <DatePicker
                    selected={selectedDate}
                    onChange={handleDateChange}
                    dateFormat="dd/MM/yyyy"
-                   customInput={<IconCalendar/>}
+                   customInput={<IconCalendar className="bg-gray-600"/>}
                  />
                  <p className="text-black ml-2">
                    { selectedDate?.toLocaleDateString('en-GB') }
                  </p>
-
+              </div>
+              <div>
                 <Button
                   type="submit"
                   disabled={taskTitle && listId ? false : true}
@@ -83,9 +76,11 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
                  >
                   Add
                </Button>
-              </div>
+             </div>
+            </div>
          </form>
-       )
- }
+    </div>
+  )
+}
 
 export default AddTask

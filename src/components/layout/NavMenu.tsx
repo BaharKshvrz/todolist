@@ -2,6 +2,8 @@ import { useState } from 'react'
 import IconNotification4Line from '../../assets/icons/Notification'
 import IconSearch from '../../assets/icons/Search'
 import IconProfile from '../../assets/icons/Profile';
+import IconHeart from '../../assets/icons/Heart';
+import IconSettingsOutline from '../../assets/icons/Setting';
 
 const TopMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,7 +11,7 @@ const TopMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <div className="hidden sm:block">
+    <div className="flex">
        <div className="ml-4 flex items-center space-x-4">
        <div>
         <IconNotification4Line/>
@@ -20,6 +22,8 @@ const TopMenu = () => {
         </span>
        </div>
        <div><IconSearch/></div>
+       <div><IconHeart/></div>
+       <div><IconSettingsOutline/></div>
        <button
          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
          onClick={toggleMenu}
