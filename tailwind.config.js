@@ -4,6 +4,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'sans': ['"Open Sans"'],
+    },
     extend: {
       animation: {
         blob: "blob 7s infinite",

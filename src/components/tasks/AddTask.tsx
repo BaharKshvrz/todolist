@@ -48,7 +48,7 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
                              Add Task to <span className="font-bold text-gray-900 text-lg">{listData.name}</span>
                            </h1>) 
                         : ""
-               } 
+             } 
                 <Input 
                   type="text"
                   value={taskTitle}

@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { RootState, selectTasksForList } from '../../store/todo/todo.selectors';
 import TaskItem from './TaskItem';
 import Accordion from '../UI/Accordion';
-import NoDataFound from '../layout/NotDataFound';
 import TextualComponent from '../UI/TextualComponent';
 
 type AddTaskProps = {
