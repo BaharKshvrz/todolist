@@ -15,7 +15,7 @@ const TasksList: React.FC = () => {
            <Accordion 
                 key={task.id}
                 title={task.name}
-                classes="bg-purple-500"
+                classes="bg-black rounded-sm"
                 summary={<ListSummary listId={task.id}/>}
             >
               <div className="bg-white border p-1">

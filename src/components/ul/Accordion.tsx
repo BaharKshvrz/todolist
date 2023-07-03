@@ -24,7 +24,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, classes,  summary, childre
                            <div className="w-full">
                               <button
                                 onClick={toggleAccordion}
-                                className="flex items-center w-full p-1 font-medium text-left text-gray-500 border border-gray-100 rounded-tl-md focus:ring-2 focus:ring-gray-200 hover:bg-gray-100"
+                                className="flex items-center w-full p-1 font-medium text-left text-gray-500 border border-gray-200 rounded-tl-md focus:ring-2 focus:ring-gray-200 hover:bg-gray-100"
                                 data-accordion-target="#accordion-collapse-body-1"
                                 aria-expanded="true" 
                                 aria-controls="accordion-collapse-body-1"

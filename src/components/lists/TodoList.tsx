@@ -4,11 +4,26 @@ import TodoItem from "./TodoItem"
 import { selectLists } from "../../store/todo/todo.selectors";
 import IconSearch from "../../assets/icons/Search";
 import Input from "../ul/Input";
+import { ChangeEvent, useState } from "react";
+import { List} from "../../store/todo/todo.types";
 
 const TodoList : React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   let todos = useSelector(selectLists);
   let todosList = todos ? Object.values(todos) : null
+  let filteredList: List[] = [];
 
+  // Filter the data based on the search term
+  if (todosList) {
+        filteredList = todosList.filter((item) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }
+  // Handle search term input change
+  const handleSearchTermChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+  
   return (
     <>
         <div className="flex flex-col items-center">
@@ -21,6 +36,7 @@ const TodoList : React.FC = () => {
             </div>
             <Input 
               type="text"
+              onChange={handleSearchTermChange}
               className="block p-2 pl-10 text-sm w-full text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
               placeholder="Search"
               />
@@ -28,7 +44,7 @@ const TodoList : React.FC = () => {
           </div>
 
           <div className="w-full">
-            { todosList && todosList.map((todo, index) => 
+            { filteredList.length && filteredList.map((todo, index) => 
               <TodoItem
                  key= {index}
                  list= {todo}
