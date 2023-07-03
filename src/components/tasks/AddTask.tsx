@@ -19,7 +19,7 @@ type AddTaskProps = {
 const AddTask: React.FC<AddTaskProps> = ({listId}) => {
   const dispatch = useDispatch();
   const [ taskTitle, setTaskTitle ] = useState("");  
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("medium");
   const handleSelectChange = (value: string) => {
       setSelectedOption(value);
   };
@@ -36,7 +36,7 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
           title: taskTitle,
           id: uuid(),  
           completion: false,
-          priority: selectedOption ? selectedOption : "medium",
+          priority: selectedOption,
           date: selectedDate!
        };
       dispatch(addTaskToList({listId: listId!,task: newTask}));
@@ -70,6 +70,7 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
                    selected={selectedDate}
                    onChange={handleDateChange}
                    dateFormat="dd/MM/yyyy"
+                   minDate={new Date()}
                    customInput={<IconCalendar/>}
                  />
                  <p className="text-black ml-2">

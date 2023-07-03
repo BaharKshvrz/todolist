@@ -6,7 +6,6 @@ body {
    @apply font-sans;
 }
 
-/* max-w-7xl */
 .pageContainer {
     @apply flex flex-grow bg-black;
   }  
@@ -19,4 +18,3 @@ body {
       animation-delay: 4s;
     }
   }
-  

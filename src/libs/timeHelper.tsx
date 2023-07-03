@@ -28,7 +28,7 @@ export const RemainingDays: React.FC<TimeProps> = ({ date }) => {
 
   const remainingDays = calculateRemainingDays(date);
 
-  return <> { remainingDays ? `${remainingDays} days` : "" }</>;
+  return <> { remainingDays ? `${remainingDays} day(s)` : "" }</>;
 };
 
 
