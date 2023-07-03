@@ -15,7 +15,7 @@ A simple Todo List application built with React and TypeScript.
 - Redux
 - Tailwind CSS
 
-## The UL View
+## The UI Demo
 ![](/public/images/todolist.png)
 
 
