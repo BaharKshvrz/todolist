@@ -1,13 +1,14 @@
 export const priorityList = [
-    { value: 'high', label: 'High' },
-    { value: 'medeium', label: 'Medeium' },
-    { value: 'low', label: 'Low' },
+    { value: "", label: "Priority" },
+    { value: "low", label: "Low" },
+    { value: "medium", label: "Medium" },
+    { value: "high", label: "High" },
 ];
 
 export const priorityColors = {
-    "high" : "orange",
-    "medeium" : "blue",
     "low" : "green",
+    "medium" : "blue",
+    "high" : "red",
 };
 
 

@@ -13,5 +13,4 @@ const Logo: FC<LogoProps> = ({ title, classes }) => {
     </>
   )
 }
-
 export default Logo

@@ -31,14 +31,14 @@ const TopMenu = () => {
          <IconProfile/>
        </button>
         {isMenuOpen && (
-        <div className="origin-top-right absolute right-0 top-10 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-         <ul>
-            <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Account</li>
-            <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Working Status</li>
-            <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Log Out</li>
-         </ul>
-        </div>
-       )}
+            <div className="origin-top-right absolute right-0 top-10 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+            <ul>
+                <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Account</li>
+                <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Working Status</li>
+                <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Log Out</li>
+            </ul>
+            </div>
+         )}
        </div>
    </div>
   )

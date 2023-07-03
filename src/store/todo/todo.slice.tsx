@@ -3,6 +3,7 @@ import { List, Task, TodosSliceState } from "./todo.types";
 
 const initialState: TodosSliceState = {
   lists: {},
+  activeList: "",
 };
 
 export const todosSlice = createSlice({
@@ -19,7 +20,13 @@ export const todosSlice = createSlice({
       let updatedItem = state.lists[action.payload.id];
       state.lists[action.payload.id] = {...updatedItem, name: action.payload.name};
     },
-    addTaskToList: (
+    activeTodoList: (state, action: PayloadAction<string>) => {
+      state.activeList = action.payload;
+   },
+   inActiveTodoList: (state, action) => {
+      state.activeList = "";
+   },
+   addTaskToList: (
       state,
       action: PayloadAction<{ listId: string; task: Task }>
     ) => {
@@ -54,7 +61,7 @@ export const todosSlice = createSlice({
       const { listId, taskId } = action.payload;
       const task = state.lists[listId].tasks.find(t => t.id === taskId);
       if (task) {
-        task.completion = !task.completion;
+         task.completion = !task.completion;
       }
     },
   },
@@ -64,6 +71,8 @@ export const {
                 addTodoList,
                 removeTodoList, 
                 updateTodoList, 
+                activeTodoList,
+                inActiveTodoList,
                 addTaskToList,
                 updateTaskInList,
                 toggleTaskCompletion,

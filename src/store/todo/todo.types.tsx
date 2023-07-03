@@ -12,10 +12,11 @@ export interface List {
     tasks: Task[];
   }
   
-  export interface Lists {
+export interface Lists {
     [id: string]: List
   }
 
 export interface TodosSliceState {
     lists: Lists;
+    activeList: string;
   }

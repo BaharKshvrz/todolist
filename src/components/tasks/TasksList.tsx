@@ -1,13 +1,17 @@
 import { useSelector } from 'react-redux';
-import { selectLists } from '../../store/todo/todo.selectors';
+import { selectActiveList, selectLists } from '../../store/todo/todo.selectors';
 import Accordion from '../ul/Accordion';
 import ListTasks from '../lists/ListTasks';
 import ListSummary from '../lists/ListSummary';
 
 const TasksList: React.FC = () => {
+  const activeList =  useSelector(selectActiveList);
+  console.log("activeList", activeList)
   let todos = useSelector(selectLists);
   let todosList = todos ? Object.values(todos) : null
-
+  if (activeList && todosList) {
+     todosList = todosList.filter(todo => todo.id === activeList)
+  }
   return (
     <>
        <div className="mt-5">

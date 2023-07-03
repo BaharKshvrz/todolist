@@ -30,12 +30,13 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
 
   const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     if (taskTitle) {
        let newTask: Task = {
           title: taskTitle,
           id: uuid(),  
           completion: false,
-          priority: selectedOption,
+          priority: selectedOption ? selectedOption : "medium",
           date: selectedDate!
        };
       dispatch(addTaskToList({listId: listId!,task: newTask}));
@@ -43,7 +44,6 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
       setSelectedDate(null);
     }
   }
-
   return (
           <form onSubmit={handleAddTask}>
               <div className="flex items-center space-x-1 hover:cursor-pointer">
@@ -75,7 +75,6 @@ const AddTask: React.FC<AddTaskProps> = ({listId}) => {
                  <p className="text-black ml-2">
                    { selectedDate?.toLocaleDateString('en-GB') }
                  </p>
-
                 <Button
                   type="submit"
                   disabled={taskTitle && listId ? false : true}

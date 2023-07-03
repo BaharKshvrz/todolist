@@ -14,15 +14,16 @@ type MainContentProps = {
 
 const ListSummary: React.FC<MainContentProps> = ({listId}) => {
   const listData =  useSelector((state: RootState) => selectListById(listId)(state));
+
   /* calculate the count of tasks */
   const listCount = listData.tasks.length;
   const completedTask = listData.tasks.filter(todo => todo.completion === true) 
-  const completedCount = Fraction(completedTask.length, listCount);
-  const uncompletedCount = Fraction(listCount - completedTask.length, listCount)
+  const completedCount = Fraction(completedTask.length, listCount)
+  const incompletedCount = Fraction(listCount - completedTask.length, listCount)
 
   /* calculate the count of priorities */
-  const highPriority = getCountOfPriority(listData, "high")
-  const mediumPriority = getCountOfPriority(listData, "medium")
+  const highPriority = completedCount ? getCountOfPriority(listData, "high") : 0
+  const mediumPriority = incompletedCount ? getCountOfPriority(listData, "medium") : 0
   const lowPriority = listCount - highPriority - mediumPriority;
 
   return (
@@ -53,10 +54,13 @@ const ListSummary: React.FC<MainContentProps> = ({listId}) => {
             <tr>
                 <th className="p-1"></th>
                 <td>  
-                     <div className="flex h-6 px-20">
-                       <div className={`w-${uncompletedCount} h-full grow bg-red-500`}></div>
-                       <div className={`w-${completedCount} h-full grow bg-green-500`}></div>
-                    </div>
+                    { listCount ? ( <div className="flex h-6 px-20">
+                                       <div className={`w-${incompletedCount} h-full grow bg-red-500`}></div>
+                                       <div className={`w-${completedCount} h-full grow bg-green-500`}></div>
+                                    </div>
+                                )
+                                :  <div className="font-thin text-sm">No Tasks</div>
+                    }
                 </td>
                 <td>
                 <div className="flex h-6 px-20 justify-center space-x-1 font-thin text-sm">
@@ -76,9 +80,8 @@ const ListSummary: React.FC<MainContentProps> = ({listId}) => {
         </table>
        </div>
     </div>
-
     <div className="text-gray-400 ml-5">
-       <h6>{listData.tasks.length} tasks</h6>
+         <h6>{listData.tasks.length} tasks</h6>
     </div>
     </div>
   );

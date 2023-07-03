@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { List } from "../../store/todo/todo.types";
-import { removeTodoList, updateTodoList } from "../../store/todo/todo.slice";
+import { activeTodoList, removeTodoList, updateTodoList } from "../../store/todo/todo.slice";
 import { useState } from "react";
 import PopupModal from "../modal/PopupModal";
 import Button from "../ul/Button";
@@ -40,6 +40,10 @@ const TodoItem: React.FC<TodoItemProps> = ({ list }) => {
   const OnDelteHandler = () => {
     setShowModal(true);
   }
+  
+  const onSelectList = () => {
+     dispatch(activeTodoList(list.id));
+  }
 
   return (
     <>
@@ -52,7 +56,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ list }) => {
                         className="block w-full p-2 text-gray-900 border border-gray-200 rounded-lg bg-white text-md"
                         onChange={e => setTodoTitle(e.target.value)}
                         />
-                     : list.name
+                     : <span className="hover:cursor-pointer" onClick={onSelectList}>{list.name}</span>
           }
         </div>
         <div className="flex items-center justify-end">
@@ -74,7 +78,6 @@ const TodoItem: React.FC<TodoItemProps> = ({ list }) => {
       </div>
       { showModal && <PopupModal onCancel={handleCloseModal} onDelete={handleConfirmDelete}/>}
     </>
-
   )
 }
 

@@ -6,7 +6,6 @@ import Checkbox from '../ul/Checkbox';
 import { toggleTaskCompletion } from '../../store/todo/todo.slice';
 import { useDispatch } from 'react-redux';
 
-
 type TodoItemProps = {
     task: Task,
     listId: string,
@@ -33,7 +32,6 @@ const TaskItem: React.FC<TodoItemProps> = ({listId, task}) => {
              labelCalsses='w-full ml-2 text-base font-semibold text-gray-500 text-lg'
              />
        </div>
-
        { task.date ? 
                    <time className="flex items-center text-base p-3 font-thin text-gray-900">
                        <IconCalendar/> Due <Time date={new Date(task.date)}/> 

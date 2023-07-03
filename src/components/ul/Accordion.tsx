@@ -56,8 +56,6 @@ const Accordion: React.FC<AccordionProps> = ({ title, classes,  summary, childre
                       </div>
                  </>)
           }
-
-
     </div>
   );
 };

@@ -12,7 +12,6 @@ const AddNewList = () => {
 
   const addHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (listName) {
        let newList: List = {
          name: listName,

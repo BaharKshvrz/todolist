@@ -5,8 +5,8 @@ import TodoList from '../lists/TodoList';
 // Using Compound Components here
 const SidebarContent = (props: {children: ReactNode}) => { 
    return <div className="flex flex-col m-2 p-5 mt-0 bg-white rounded-tr-lg shadow-sm border border-gray-200">
-            {props.children} 
-          </div>
+             {props.children} 
+           </div>
 };
 SidebarContent.AddNewTodo = AddNewTodo;
 SidebarContent.TodoList = TodoList;
