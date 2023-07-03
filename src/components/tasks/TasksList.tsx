@@ -6,7 +6,6 @@ import ListSummary from '../lists/ListSummary';
 
 const TasksList: React.FC = () => {
   const activeList =  useSelector(selectActiveList);
-  console.log("activeList", activeList)
   let todos = useSelector(selectLists);
   let todosList = todos ? Object.values(todos) : null
   if (activeList && todosList) {

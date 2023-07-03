@@ -15,6 +15,9 @@ A simple Todo List application built with React and TypeScript.
 - Redux
 - Tailwind CSS
 
+## The UL View
+![](/public/images/todolist.png)
+
 
 ## Available Scripts
 In the project directory, you can run:
