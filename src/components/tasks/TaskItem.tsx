@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Task } from '../../store/todo/todo.types';
 import IconCalendar from '../../assets/icons/Calendar';
-import Time from '../../libs/timeHelper';
+import {Time} from '../../libs/timeHelper';
 import Checkbox from '../ul/Checkbox';
 import { toggleTaskCompletion } from '../../store/todo/todo.slice';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { RootState, selectListById } from '../../store/todo/todo.selectors';
+
 
 type TodoItemProps = {
     task: Task,

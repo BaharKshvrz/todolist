@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 import { RootState, selectTasksForList } from "../../store/todo/todo.selectors";
 import { useDispatch } from "react-redux";
 import { removeTaskFromList, toggleTaskCompletion, updateTaskInList } from "../../store/todo/todo.slice";
-import Time from "../../libs/timeHelper";
 import { priorityColors } from "../../data/priorityList";
 import IconDeleteBin5Line from "../../assets/icons/Remove";
 import { useState } from "react";
 import Input from "../ul/Input";
 import { Task } from "../../store/todo/todo.types";
 import useDebounce from "../hooks/useDebounce";
+import { RemainingDays, Time } from "../../libs/timeHelper";
 
 type MainContentProps = {
     listId: string;
@@ -117,7 +117,7 @@ const ListTasks: React.FC<MainContentProps> = ({ listId }) => {
                         }      
                   </td>
                   <td className="p-1 text-sm">
-                    3days
+                     {task.date ? <RemainingDays date={new Date(task.date)}/> : "" }
                   </td>
                   <td className="p-1 flex justify-center items-center space-x-1 hover:cursor-pointer">
                     <IconDeleteBin5Line onClick={() => removeTaskHandler(task.id)}/>
